@@ -76,7 +76,7 @@ local function lua_init(...)
 		if s.has_menu then
 			if key:repr() == "Control+d" then 
 				local cand=context:get_selected_candidate()
-        -- delete_candidate(cand ,rm_tab)
+        			-- delete_candidate(cand ,rm_tab)
 				rm_tab[cand:get_genuine().text]=true
 				append_word(cand:get_genuine().text)
 				context:refresh_non_confirmed_composition() 
@@ -125,11 +125,11 @@ local function lua_init(...)
 	--- filter  
 	local function filter_func(input,seg,env)   -- pass filter 
 		for cand in input:iter() do 
-      if string.find(cand.text, '☯〔超級簡拼〕')  == nil then
-        if not rm_tab[cand.text] then
-          yield(cand)
-        end 
-      end
+		      if string.find(cand.text, '☯〔超級簡拼〕')  == nil then
+			if not rm_tab[cand.text] then
+			  yield(cand)
+			end 
+		      end
 		end 
 	end
 	local function filter_init_func(env)
