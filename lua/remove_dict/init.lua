@@ -14,24 +14,39 @@
 
 
 local function append_word(word)
-  local path=string.gsub(debug.getinfo(1).source,"^@(.+\\)[^\\]+$", "%1")
-	local filename= path .. "\\" .. "rm_word.txt"
+	local dir_split = package.config:sub(1,1)
+	local spilt_line = '\r'
+	if dir_split == '\\' then
+		spilt_line = '\n'
+	end
+  local path=string.gsub(debug.getinfo(1).source,"^@(.+" .. dir_split .. ")[^" .. dir_split .. "]+$", "%1")
+	local filename= path .. dir_split .. "rm_word.txt"
 	local fn=io.open(filename,"a+")
-	fn:write( word .. "\n")
+	fn:write( word .. spilt_line)
 	fn:close()
 end 
 
 local function print_info(word)
-  local path=string.gsub(debug.getinfo(1).source,"^@(.+\\)[^\\]+$", "%1")
-  local filename= path .. "\\" .. "print_info.txt"
+	local dir_split = package.config:sub(1,1)
+	local spilt_line = '\r'
+	if dir_split == '\\' then
+		spilt_line = '\n'
+	end
+  local path=string.gsub(debug.getinfo(1).source,"^@(.+" .. dir_split .. ")[^" .. dir_split .. "]+$", "%1")
+  local filename= path .. dir_split .. "print_info.txt"
   local fn=io.open(filename,"a+")
-  fn:write( word .. "\n")
+  fn:write( word .. spilt_line)
   fn:close()
 end 
 
 local function load_word()
-  local path=string.gsub(debug.getinfo(1).source,"^@(.+\\)[^\\]+$", "%1")
-	local filename= path .. "\\" .. "rm_word.txt"
+	local dir_split = package.config:sub(1,1)
+	local spilt_line = '\r'
+	if dir_split == '\\' then
+		spilt_line = '\n'
+	end
+  local path=string.gsub(debug.getinfo(1).source,"^@(.+" .. dir_split .. ")[^" .. dir_split .. "]+$", "%1")
+	local filename= path .. dir_split .. "rm_word.txt"
 	local fn= io.open(filename, "r") or io.open(filename,"w+")
 	local tab={}
   for word in fn:lines() do
@@ -57,7 +72,7 @@ end
 
 local function lua_init(...)
 	local args={...} 
-	rm_tab= load_word() 
+	rm_tab= load_word()
 
 	local function processor_func(key,env) -- key:KeyEvent,env_
 		local Rejected, Accepted, Noop = 0,1,2 
@@ -92,7 +107,6 @@ local function lua_init(...)
 		env.connect=Notifier(env) -- 提供 7種notifier commit update select delete option_update property_update unhandle_key
 		--env.connect:commit( func)
 		--env.connect:update( func)
-
 	end 
 
 	local function processor_fini_func(env) 
@@ -114,7 +128,6 @@ local function lua_init(...)
 
 	-- translator 
 	local function translator_func(input,seg,env)  -- input:string, seg:Segment, env_
-
 		-- yield( Candidate( type , seg.start,seg._end, data , comment )
 	end 
 	local function translator_init_func(env)
