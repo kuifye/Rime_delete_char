@@ -1,0 +1,5 @@
+patch:
+  'engine/processors/@before 0':
+    lua_processor@rm_word_processor
+  'engine/filters/@before 0':
+    lua_filter@rm_word_filter
