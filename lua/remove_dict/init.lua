@@ -22,11 +22,11 @@ local function append_word(word)
 end 
 
 local function print_info(word)
-  local path=string.gsub(debug.getinfo(1).source,"^@(.+\\)[^\\]+$", "%1")
-  local filename= path .. "\\" .. "print_info.txt"
-  local fn=io.open(filename,"a+")
-  fn:write( word .. "\n")
-  fn:close()
+	local path=string.gsub(debug.getinfo(1).source,"^@(.+\\)[^\\]+$", "%1")
+	local filename= path .. "\\" .. "print_info.txt"
+	local fn=io.open(filename,"a+")
+	fn:write( word .. "\n")
+	fn:close()
 end 
 
 local function load_word()
@@ -43,16 +43,16 @@ end
 
 -- return set table
 local function delete_candidate(cand ,tab)
-  tab = tab or {}
-  tab[cand.text]=true
-  append_word(cand.text)
-  local ctype= cand:get_dynamic_typeo()
-  if ctype == "ShadowCandidate" then
-    delete_candidate(cand:get_genuine() ,tab)
-  elseif ctype == "UniquifiedCandidate" then
-    delete_candidate(cand:get_genuine() ,tab)
-  end
-  return tab
+	tab = tab or {}
+	tab[cand.text]=true
+	append_word(cand.text)
+	local ctype= cand:get_dynamic_typeo()
+	if ctype == "ShadowCandidate" then
+		delete_candidate(cand:get_genuine() ,tab)
+	elseif ctype == "UniquifiedCandidate" then
+		delete_candidate(cand:get_genuine() ,tab)
+	end
+	return tab
 end
 
 local function lua_init(...)
@@ -63,14 +63,14 @@ local function lua_init(...)
 		local Rejected, Accepted, Noop = 0,1,2 
 		local engine=env.engine
 		local context=engine.context
-    local stat= setmetatable({}, {})
-    local comp= context.composition
-    stat.always=true
-    stat.composing= context:is_composing()
-    stat.empty= not stat.composing
-    stat.has_menu= context:has_menu()
-    stat.paging= not comp:empty() and comp:back():has_tag("paging")
-    local s = stat
+		local stat= setmetatable({}, {})
+		local comp= context.composition
+		stat.always=true
+		stat.composing= context:is_composing()
+		stat.empty= not stat.composing
+		stat.has_menu= context:has_menu()
+		stat.paging= not comp:empty() and comp:back():has_tag("paging")
+		local s = stat
 		if s.empty then end 
 		if s.always then end 
 		if s.has_menu then
