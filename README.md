@@ -1,4 +1,4 @@
-# rime_delete_char
+# Rime_delete_char
 
 (win)Rime强制删词脚本，引用自佛振提供的删词脚本，略有删改。
 
