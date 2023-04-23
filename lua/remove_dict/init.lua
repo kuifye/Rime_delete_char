@@ -147,8 +147,4 @@ local function lua_init(...)
 	return _tab
 end 
 
-
-
-
-
 return lua_init    
