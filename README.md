@@ -10,5 +10,5 @@ control+d可以强制过滤掉词汇。
 
 ```
 local path=string.gsub(debug.getinfo(1).source,"^@(.+\\)[^\\]+$", "%1")
-
-\\改为/
+```
+反斜杠 \\ 改为 /
